@@ -3,7 +3,7 @@ module.exports.nuxt = {
   ** Headers of the page
   */
   head: {
-    title: 'starter',
+    title: 'Doctor Case Review',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -16,7 +16,7 @@ module.exports.nuxt = {
   /*
   ** Global CSS
   */
-  css: ['~assets/css/main.css'],
+  css: [],
   /*
   ** Customize the progress-bar color
   */
@@ -24,7 +24,10 @@ module.exports.nuxt = {
   /*
    ** Build configuration
    */
-  build: { },
+  build: {},
+  buildModules: [
+    '@nuxtjs/vuetify',
+  ],
   srcDir: 'client/',
-  plugins: [ { src: '~plugins/socket.io.js', ssr: false } ],
+  plugins: [{ src: '~plugins/socket.io.js', ssr: false }],
 };
