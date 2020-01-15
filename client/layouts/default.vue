@@ -3,7 +3,17 @@
     <v-app-bar app>
       <v-toolbar-title>Doctor Case Review</v-toolbar-title>
       <v-spacer/>
-      <v-dialog v-model="loginShow" persistent max-width="300px">
+      <div v-if="user !== null" class="col-4">
+        <v-row justify="end">
+          <v-col cols="auto" align-self="center">
+            Logged in as: {{ user.name }}
+          </v-col>
+          <v-col cols="auto">
+            <v-btn color="accent" @click="onLogout()">Log out</v-btn>
+          </v-col>
+        </v-row>
+      </div>
+      <v-dialog v-else v-model="loginShow" persistent max-width="300px">
         <template v-slot:activator="{ on }">
           <v-btn color="primary" v-on="on">Log in</v-btn>
         </template>
@@ -55,21 +65,27 @@
             .then(response => {
               this.user = response.data.user;
               this.loginShow = false;
+              this.loginShowError = false;
             }).catch(error => {
-            console.log(error);
             this.loginError = error.response.data.message;
             this.loginShowError = true;
           }).finally(() => {
             this.loginForm = { email: '', password: '' };
           });
-        }
+        },
+        onLogout: () => {
+          this.$axios.post('/logout')
+            .then(response => {
+              this.user = null;
+            }).catch(() => {});
+        },
       };
     },
     created () {
       this.$vuetify.theme.dark = true;
       this.$axios.$get('/login')
         .then(response => {
-          this.user = response.data;
+          this.user = response;
         }).catch(() => {});
     }
   };

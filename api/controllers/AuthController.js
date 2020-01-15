@@ -2,7 +2,6 @@ const passport = require('passport');
 
 module.exports = {
   getUser: (req, res) => {
-    console.log(req);
     if (req.isAuthenticated()) {
       return res.ok(req.user);
     }
