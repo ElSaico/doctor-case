@@ -1,17 +1,19 @@
 <template>
-  <section class="container">
-    <h1 class="title">
-      Universal Vue.js Application Framework
-    </h1>
-    <nuxt-link class="button" to="/about">
-      About page
-    </nuxt-link>
-  </section>
+  <v-container>
+    <v-card class="py-6" v-if="user === null">
+      <v-card-text class="headline text-center">
+        Please log in to start reviewing cases.
+      </v-card-text>
+    </v-card>
+  </v-container>
 </template>
 
-<style scoped>
-.title
-{
-  margin: 50px 0;
-}
-</style>
+<script>
+  export default {
+    computed: {
+      user () {
+        return this.$store.state.user;
+      }
+    },
+  };
+</script>

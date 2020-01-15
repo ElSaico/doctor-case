@@ -53,9 +53,13 @@
 
 <script>
   export default {
+    computed: {
+      user () {
+        return this.$store.state.user;
+      }
+    },
     data () {
       return {
-        user: null,
         loginShow: false,
         loginShowError: false,
         loginError: null,
@@ -63,7 +67,7 @@
         onSubmit: () => {
           this.$axios.post('/login', this.loginForm)
             .then(response => {
-              this.user = response.data.user;
+              this.$store.commit('login', response.data.user);
               this.loginShow = false;
               this.loginShowError = false;
             }).catch(error => {
@@ -76,7 +80,7 @@
         onLogout: () => {
           this.$axios.post('/logout')
             .then(response => {
-              this.user = null;
+              this.$store.commit('logout');
             }).catch(() => {});
         },
       };
@@ -85,7 +89,7 @@
       this.$vuetify.theme.dark = true;
       this.$axios.$get('/login')
         .then(response => {
-          this.user = response;
+          this.$store.commit('login', response);
         }).catch(() => {});
     }
   };
