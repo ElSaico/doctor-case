@@ -1,0 +1,44 @@
+{
+  "name": "doctor-case",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Nuxt.js project",
+  "author": "Bruno Marques <bruno@bmarques.net>",
+  "keywords": [],
+  "dependencies": {
+    "@sailshq/lodash": "^3.10.3",
+    "bcrypt": "^3.0.7",
+    "cookie-signature": "^1.1.0",
+    "cross-env": "^5.0.1",
+    "csv-parse": "^4.8.5",
+    "nuxt": "^2.3.4",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "sails": "^1.1.0",
+    "sails-hook-orm": "^2.1.1",
+    "sails-hook-sockets": "^1.5.5",
+    "sails-mongo": "^1.0.1",
+    "sails.io.js": "^1.2.1",
+    "socket.io-client": "^2.2.0"
+  },
+  "devDependencies": {
+    "@sailshq/eslint": "^4.19.3",
+    "babel-eslint": "^7.1.1",
+    "eslint": "^5.7.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-html": "^5.0.3",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.24.1",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^5.0.0-beta.3"
+  },
+  "scripts": {
+    "dev": "sails lift",
+    "build": "cross-env NODE_ENV=production sails run build-nuxt",
+    "start": "cross-env NODE_ENV=production sails lift",
+    "lint": "eslint . --max-warnings=0 --ext .js,.vue --report-unused-disable-directives && echo '✔  Your .js files look good.'"
+  },
+  "main": "app.js"
+}
