@@ -3,7 +3,7 @@
     <v-app-bar app>
       <v-toolbar-title>Doctor Case Review</v-toolbar-title>
       <v-spacer/>
-      <v-dialog v-model="loginDialog" persistent max-width="300px">
+      <v-dialog v-model="loginShow" persistent max-width="300px">
         <template v-slot:activator="{ on }">
           <v-btn color="primary" v-on="on">Log in</v-btn>
         </template>
@@ -12,8 +12,8 @@
             <v-card-title>Log in</v-card-title>
             <v-card-text>
               <v-container fluid>
-                <v-alert dense dismissible transition="fade-transition" type="error" v-model="loginDialogError">
-                  {{ loginResponse.message }}
+                <v-alert dense dismissible transition="fade-transition" type="error" v-model="loginShowError">
+                  {{ loginError }}
                 </v-alert>
                 <v-text-field v-model="loginForm.email" label="Email" required/>
                 <v-text-field v-model="loginForm.password" label="Password" type="password" required/>
@@ -21,7 +21,7 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer/>
-              <v-btn text @click="loginDialog = false">Close</v-btn>
+              <v-btn text @click="loginShow = false">Close</v-btn>
               <v-btn color="primary" type="submit">Log in</v-btn>
             </v-card-actions>
           </v-card>
@@ -45,27 +45,32 @@
   export default {
     data () {
       return {
-        loginDialog: false,
-        loginDialogError: false,
-        loginForm: {
-          email: '',
-          password: '',
-        },
-        loginResponse: {},
+        user: null,
+        loginShow: false,
+        loginShowError: false,
+        loginError: null,
+        loginForm: { email: '', password: '' },
         onSubmit: () => {
-          this.$socket.post('/login', this.loginForm, (record, response) => {
-            this.loginResponse = record;
-            if (response.error) {
-              this.loginDialogError = true;
-            } else {
-              this.loginDialog = false;
-            }
+          this.$axios.post('/login', this.loginForm)
+            .then(response => {
+              this.user = response.data.user;
+              this.loginShow = false;
+            }).catch(error => {
+            console.log(error);
+            this.loginError = error.response.data.message;
+            this.loginShowError = true;
+          }).finally(() => {
+            this.loginForm = { email: '', password: '' };
           });
         }
       };
     },
     created () {
       this.$vuetify.theme.dark = true;
+      this.$axios.$get('/login')
+        .then(response => {
+          this.user = response.data;
+        }).catch(() => {});
     }
   };
 </script>

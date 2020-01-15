@@ -28,6 +28,9 @@ module.exports.nuxt = {
   buildModules: [
     '@nuxtjs/vuetify',
   ],
+  modules: [
+    '@nuxtjs/axios',
+  ],
   srcDir: 'client/',
   plugins: [{ src: '~plugins/socket.io.js', ssr: false }],
 };

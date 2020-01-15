@@ -25,7 +25,7 @@ passport.use(new LocalStrategy(
         if (!res) {
           return cb(null, false, { message: 'Invalid user or password' });
         }
-        return cb(null, user);
+        return cb(null, user, { message: 'Login successful' });
       });
     })
 ));

@@ -6,6 +6,7 @@
   "author": "Bruno Marques <bruno@bmarques.net>",
   "keywords": [],
   "dependencies": {
+    "@nuxtjs/axios": "^5.9.3",
     "@sailshq/lodash": "^3.10.3",
     "bcrypt": "^3.0.7",
     "cookie-signature": "^1.1.0",
