@@ -3,9 +3,9 @@
     <v-app-bar app>
       <v-toolbar-title>Doctor Case Review</v-toolbar-title>
       <v-spacer/>
-      <div v-if="user !== null" class="col-4">
+      <div v-if="user !== null" class="col-4 col-sm-6">
         <v-row justify="end">
-          <v-col cols="auto" align-self="center">
+          <v-col sm="auto" align-self="center" class="hidden-xs-only">
             Logged in as: {{ user.name }}
           </v-col>
           <v-col cols="auto">

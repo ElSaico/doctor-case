@@ -5,6 +5,6 @@ module.exports = {
     record: { type: 'string', required: true },
     doctor: { model: 'user' },
     time: { type: 'number' },
-    conditions: { collection: 'condition', via: 'cases' }
+    condition: { model: 'condition' },
   }
 };
