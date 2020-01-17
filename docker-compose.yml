@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  mongo:
+    image: mongo:4.2
+    networks:
+      - dev
+    expose:
+      - 27017
+    volumes:
+    - "mongo:/data/db"
+  dev:
+    image: node:12.14
+    depends_on:
+      - mongo
+    networks:
+      - dev
+    user: node
+    working_dir: /home/node/app
+    volumes:
+      - "./:/home/node/app"
+    ports:
+      - "1337:1337"
+    command: "npx sails lift --hookTimeout=80000"
+
+networks:
+  dev:
+
+volumes:
+  mongo:

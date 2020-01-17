@@ -16,6 +16,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "sails": "^1.1.0",
+    "sails-hook-fixtures": "^1.0.2",
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^1.5.5",
     "sails-mongo": "^1.0.1",
